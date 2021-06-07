@@ -26,7 +26,7 @@ project.configurations.implementation.setCanBeResolved(true)
 jar {
 	manifest {
 		attributes(
-				'Class-Path': configurations.implementation.collect { it.name }.join(' '),
+				'Class-Path': configurations.implementation.collect { it.toURI().toString() }.join(' '),
 				'Main-Class': 'com.epam.smyrnov.module13.Main'
 		)
 	}
