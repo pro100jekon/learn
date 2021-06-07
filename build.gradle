@@ -1,6 +1,11 @@
 plugins {
 	id 'java'
 	id 'idea'
+	id 'application'
+}
+
+application {
+	mainClass = "com.epam.smyrnov.module13.Main"
 }
 
 group = 'com.epam.smyrnov'
