@@ -1,11 +1,15 @@
 plugins {
 	id 'java'
 	id 'idea'
-	id 'application'
 }
 
-application {
-	mainClass = "com.epam.smyrnov.module13.Main"
+jar {
+	manifest {
+		attributes(
+				'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+				'Main-Class': 'com.epam.smyrnov.module13.Main'
+		)
+	}
 }
 
 group = 'com.epam.smyrnov'
