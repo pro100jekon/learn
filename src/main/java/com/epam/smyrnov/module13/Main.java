@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         SqsClient sqsClient = SqsClient.builder()
-            .region(Region.US_WEST_2)
+            .region(Region.US_EAST_2)
             .build();
         SendMessageBatchRequest request =
             SendMessageBatchRequest.builder()
