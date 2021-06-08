@@ -1,6 +1,6 @@
 plugins {
-	id 'java'
-	id 'idea'
+    id 'java'
+    id 'idea'
 }
 
 
@@ -9,28 +9,31 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
-	mavenLocal()
-	mavenCentral()
+    mavenLocal()
+    mavenCentral()
 }
 
 dependencies {
-	implementation platform('software.amazon.awssdk:bom:2.15.0')
-	implementation 'software.amazon.awssdk:sqs'
-	implementation 'org.apache.logging.log4j:log4j-api:2.14.1'
-	implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
-	implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.14.1'
-	implementation 'org.slf4j:slf4j-api:2.0.0-alpha1'
-	implementation 'org.slf4j:slf4j-simple:2.0.0-alpha1'
+    implementation platform('software.amazon.awssdk:bom:2.15.0')
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.0'
+    implementation 'software.amazon.awssdk:sqs'
+    implementation 'software.amazon.awssdk:sns'
+    implementation 'org.apache.logging.log4j:log4j-api:2.14.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.14.1'
+    implementation 'org.slf4j:slf4j-api:2.0.0-alpha1'
+    implementation 'org.slf4j:slf4j-simple:2.0.0-alpha1'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.0.0'
 }
 project.configurations.implementation.setCanBeResolved(true)
-jar {
-	manifest {
-		attributes(
-				'Class-Path': configurations.implementation.collect { it.toURI().toString() }.join(' '),
-				'Main-Class': 'com.epam.smyrnov.module13.Main'
-		)
-	}
-}
+/*jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.implementation.collect { it.toURI().toString() }.join(' '),
+                'Main-Class': 'com.epam.smyrnov.module13.Sender'
+        )
+    }
+}*/
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
