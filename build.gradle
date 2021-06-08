@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id 'idea'
+    id 'org.springframework.boot' version '2.5.0'
+    id 'io.spring.dependency-management' version "1.0.11.RELEASE"
 }
 
 
@@ -12,7 +14,11 @@ repositories {
     mavenLocal()
     mavenCentral()
 }
-
+configurations {
+    all {
+        exclude group: 'org.springframework.boot', module:'spring-boot-starter-logging'
+    }
+}
 dependencies {
     implementation platform('software.amazon.awssdk:bom:2.15.0')
     implementation 'org.springframework.boot:spring-boot-starter-web:2.5.0'
@@ -23,7 +29,7 @@ dependencies {
     implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.14.1'
     implementation 'org.slf4j:slf4j-api:2.0.0-alpha1'
     implementation 'org.slf4j:slf4j-simple:2.0.0-alpha1'
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.0.0'
+    implementation 'com.fasterxml.jackson.core:jackson-core'
 }
 project.configurations.implementation.setCanBeResolved(true)
 /*jar {
