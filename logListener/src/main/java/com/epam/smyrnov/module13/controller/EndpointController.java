@@ -2,6 +2,7 @@ package com.epam.smyrnov.module13.controller;
 
 import com.epam.smyrnov.module13.model.Log;
 import com.epam.smyrnov.module13.service.S3Service;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,9 +14,11 @@ public class EndpointController {
 
     @Autowired
     private S3Service service;
+    @Autowired
+    private ObjectMapper mapper;
 
-    @PostMapping(value = "receive", consumes = "text/plain")
-    public void receive(@RequestBody Log log) throws IOException {
-        service.appendLogToS3File(log);
+    @PostMapping(value = "receive")
+    public void receive(@RequestBody String log) throws IOException {
+        service.appendLogToS3File(mapper.readValue(log, Log.class));
     }
 }
