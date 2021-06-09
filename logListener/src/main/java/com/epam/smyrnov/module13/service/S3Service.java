@@ -19,6 +19,7 @@ public class S3Service {
     private ObjectMapper objectMapper;
 
     public void appendLogToS3File(Log log) throws IOException {
+        System.out.println("Appending");
         String content = objectMapper.readValue(
             s3Client.getObject(GetObjectRequest.builder().bucket("bucketjms").build()), String.class);
         content = content + System.lineSeparator() +  objectMapper.writeValueAsString(log);

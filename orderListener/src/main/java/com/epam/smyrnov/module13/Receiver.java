@@ -21,6 +21,7 @@ public class Receiver {
         while (true) {
             Order order = receiver.receiveOrder();
             if (order != null) {
+                System.out.println("Received!");
                 USERS.putIfAbsent(order.getUsername(), BigDecimal.ZERO);
                 Log log = new Log();
                 log.setOrder(order);
