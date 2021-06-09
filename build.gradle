@@ -1,45 +1,31 @@
 plugins {
     id 'java'
     id 'idea'
-    id 'org.springframework.boot' version '2.5.0'
-    id 'io.spring.dependency-management' version "1.0.11.RELEASE"
 }
-
-
-group = 'com.epam.smyrnov'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
-
-repositories {
-    mavenLocal()
-    mavenCentral()
-}
-configurations {
-    all {
-        exclude group: 'org.springframework.boot', module:'spring-boot-starter-logging'
+jar.enabled(false)
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    group = 'com.epam.smyrnov'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '1.8'
+    repositories {
+        mavenLocal()
+        mavenCentral()
     }
-}
-dependencies {
-    implementation platform('software.amazon.awssdk:bom:2.15.0')
-    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.0'
-    implementation 'software.amazon.awssdk:sqs'
-    implementation 'software.amazon.awssdk:sns'
-    implementation 'org.apache.logging.log4j:log4j-api:2.14.1'
-    implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
-    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.14.1'
-    implementation 'org.slf4j:slf4j-api:2.0.0-alpha1'
-    implementation 'org.slf4j:slf4j-simple:2.0.0-alpha1'
-    implementation 'com.fasterxml.jackson.core:jackson-core'
-}
-project.configurations.implementation.setCanBeResolved(true)
-/*jar {
-    manifest {
-        attributes(
-                'Class-Path': configurations.implementation.collect { it.toURI().toString() }.join(' '),
-                'Main-Class': 'com.epam.smyrnov.module13.Sender'
-        )
+    dependencies {
+        implementation platform('software.amazon.awssdk:bom:2.15.0')
+        implementation 'com.amazonaws:amazon-sqs-java-messaging-lib:1.0.8'
+        implementation 'software.amazon.awssdk:sqs'
+        implementation 'software.amazon.awssdk:sns'
+        implementation 'org.apache.logging.log4j:log4j-api:2.14.1'
+        implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
+        implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.14.1'
+        implementation 'org.slf4j:slf4j-api:2.0.0-alpha1'
+        implementation 'org.slf4j:slf4j-simple:2.0.0-alpha1'
+        implementation 'com.fasterxml.jackson.core:jackson-core'
     }
-}*/
-test {
-    useJUnitPlatform()
+    test {
+        useJUnitPlatform()
+    }
 }

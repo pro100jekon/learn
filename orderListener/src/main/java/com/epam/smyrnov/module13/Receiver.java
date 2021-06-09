@@ -4,11 +4,12 @@ import com.epam.smyrnov.module13.model.Log;
 import com.epam.smyrnov.module13.model.Order;
 import com.epam.smyrnov.module13.model.Status;
 import com.epam.smyrnov.module13.model.Type;
-import com.epam.smyrnov.module13.sender.MessageSender;
+import com.epam.smyrnov.module13.sender.MessageReceiver;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import javax.jms.JMSException;
 
 public class Receiver {
 
@@ -16,7 +17,7 @@ public class Receiver {
     private static final Map<String, BigDecimal> USERS = new HashMap<>();
 
     public static void main(String[] args) throws JsonProcessingException, InterruptedException {
-        MessageSender sender = new MessageSender();
+        MessageReceiver sender = new MessageReceiver();
         while (true) {
             Order order = sender.receiveOrder();
             if (order != null) {
