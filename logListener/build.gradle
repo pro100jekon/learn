@@ -4,6 +4,7 @@ plugins {
 }
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'software.amazon.awssdk:s3'
 }
 
 configurations {

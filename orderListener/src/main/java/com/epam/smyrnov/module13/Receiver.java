@@ -17,9 +17,9 @@ public class Receiver {
     private static final Map<String, BigDecimal> USERS = new HashMap<>();
 
     public static void main(String[] args) throws JsonProcessingException, InterruptedException {
-        MessageReceiver sender = new MessageReceiver();
+        MessageReceiver receiver = new MessageReceiver();
         while (true) {
-            Order order = sender.receiveOrder();
+            Order order = receiver.receiveOrder();
             if (order != null) {
                 USERS.putIfAbsent(order.getUsername(), BigDecimal.ZERO);
                 Log log = new Log();
@@ -36,7 +36,7 @@ public class Receiver {
                 if (log.getStatus().equals(Status.ACCEPTED)) {
                     USERS.put(order.getUsername(), USERS.get(order.getUsername()).add(order.getVolumeOrCount()));
                 }
-                sender.logResult(log);
+                receiver.logResult(log);
             }
             Thread.sleep(2000);
         }
