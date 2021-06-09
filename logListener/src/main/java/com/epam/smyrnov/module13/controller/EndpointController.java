@@ -14,7 +14,7 @@ public class EndpointController {
     @Autowired
     private S3Service service;
 
-    @PostMapping("receive")
+    @PostMapping(value = "receive", consumes = "text/plain")
     public void receive(@RequestBody Log log) throws IOException {
         service.appendLogToS3File(log);
     }
