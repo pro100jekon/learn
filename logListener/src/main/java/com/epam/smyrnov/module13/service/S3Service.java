@@ -1,7 +1,10 @@
 package com.epam.smyrnov.module13.service;
 
+import com.amazonaws.util.IOUtils;
 import com.epam.smyrnov.module13.model.Log;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,11 +26,10 @@ public class S3Service {
         System.out.println("Appending");
         String content;
         try {
-            content = objectMapper.readValue(
-                s3Client.getObject(GetObjectRequest.builder()
+            content = IOUtils.toString(s3Client.getObject(GetObjectRequest.builder()
                     .bucket("bucketjms")
                     .key("log")
-                    .build()), String.class);
+                    .build()));
         } catch (NoSuchKeyException e) {
             content = "";
         }
